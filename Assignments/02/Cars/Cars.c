@@ -18,7 +18,7 @@ int getSelection();
 int main()
 {
 
-	int carSales[10] = { 0 };
+	int carSales[50000] = { 0 };
 
 	int userSelection, carSold = 0, price = 0, sum = 0;
 
@@ -82,7 +82,7 @@ int main()
 
 			carSold++; // Car is sold add one
 
-			carSales[carSold] = price; // add the car price to carSales array
+			carSales[carSold] = price; // add the car sold to carSales array
 
 			PAUSE;
 
@@ -93,13 +93,14 @@ int main()
 
 			printf("Total cars sold: %d\n", carSold); // Display cars sold
 
-			for (int i = 0; i < 10; ++i)
+			// Loop through carSales array to add
+			for (int i = 0; i < 50000; ++i)
 			{
 				sum += carSales[i];
 			}
 
-			printf("Average car sold price: %d\n", sum / carSold);
-			printf("Total revenue: %d\n", sum);
+			printf("Average car sold price: %d\n", sum / carSold); // get the avg by dividing sum / elements in array
+			printf("Total revenue: %d\n", sum); // display sum of array
 
 			PAUSE;
 
