@@ -18,7 +18,9 @@ int getSelection();
 int main()
 {
 
-	int userSelection, price = 0;
+	int carSales[10] = { 0 };
+
+	int userSelection, carSold = 0, price = 0, sum = 0;
 
 	char firstTime = 'n', veteran = 'n', student = 'n', lastDay = 'n';
 
@@ -30,6 +32,8 @@ int main()
 		{
 
 		case 1:
+
+			// Ask user for input, used for a sale
 			CLS;
 
 			printf("What is the sticker price of the car you are buying? ");
@@ -55,26 +59,30 @@ int main()
 			// Adjust price based on questions above
 			if (lastDay == 'y')
 			{
-				price = price - (price * 0.05);
+				price = price - (price * 0.05); // Last day of the month - %5
 			}
-			else if (student == 'y' && firstTime == 'y')
+			if (student == 'y' && firstTime == 'y')
 			{
 				price = price - (price * 0.01) - 1700; // subtract all the other discounts and 1700 (700 + 500 + ADDITIONAL 500).
 			}
-			else if (firstTime == 'y')
+			if (firstTime == 'y')
 			{
-				price = price - 500;
+				price = price - 500; // First time -500
 			}
-			else if (veteran == 'y')
+			if (veteran == 'y')
 			{
-				price = price - (price * 0.01);
+				price = price - (price * 0.01); // Vet - %1
 			}
-			else if (student == 'y')
+			if (student == 'y')
 			{
-				price = price - 700;
+				price = price - 700; // Student - %5
 			}
 
 			printf("Price of car: %d\n", price);
+
+			carSold++; // Car is sold add one
+
+			carSales[carSold] = price; // add the car price to carSales array
 
 			PAUSE;
 
@@ -83,9 +91,15 @@ int main()
 		case 2:
 			CLS;
 
-			printf("Total cars sold: \n");
-			printf("Average car sold price: \n");
-			printf("Total revenue: \n");
+			printf("Total cars sold: %d\n", carSold); // Display cars sold
+
+			for (int i = 0; i < 10; ++i)
+			{
+				sum += carSales[i];
+			}
+
+			printf("Average car sold price: %d\n", sum / carSold);
+			printf("Total revenue: %d\n", sum);
 
 			PAUSE;
 
