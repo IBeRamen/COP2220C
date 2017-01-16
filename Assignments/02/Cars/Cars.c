@@ -1,7 +1,7 @@
 /*
-Name: Omar Rahman
-Assignment: Assignment 02 - Cars
-Date: 1/15/2017
+	Name: Omar Rahman
+	Assignment: Assignment 02 - Cars
+	Date: 1/15/2017
 */
 
 #include <stdlib.h>
