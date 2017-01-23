@@ -12,14 +12,21 @@
 #define PAUSE system("PAUSE");
 #define FLUSH flush();
 
+int getSum();
+int getProduct();
+int getAvg();
+int getLowest();
+
 void displayMenu();
 void flush();
+
 char getSelection();
 
 int main()
 {
 
 	int userSelection;
+	int number1 = 0, number2 = 0, number3 = 0;
 
 	do
 	{
@@ -30,11 +37,19 @@ int main()
 
 		case 'A':
 
-			// Get ints
-
 			CLS;
 
-			printf("Test");
+			printf("Enter integer 1: ");
+			scanf_s("%i", &number1);
+			FLUSH;
+
+			printf("Enter integer 2: ");
+			scanf_s("%i", &number2);
+			FLUSH;
+
+			printf("Enter integer 3: ");
+			scanf_s("%i", &number3);
+			FLUSH;
 
 			PAUSE;
 
@@ -45,7 +60,11 @@ int main()
 			// Sum
 
 			CLS;
-			printf("Test");
+			
+			int sum = getSum(number1, number2, number3);
+
+			printf("The sum is: %d\n", sum);
+
 			PAUSE;
 
 			break;
@@ -55,7 +74,11 @@ int main()
 			// Product
 
 			CLS;
-			printf("Test");
+			
+			int product = getProduct(number1, number2, number3);
+
+			printf("The product is: %d\n", product);
+
 			PAUSE;
 
 			break;
@@ -65,7 +88,11 @@ int main()
 			// Avg
 
 			CLS;
-			printf("Test");
+
+			int avg = getAvg(number1, number2, number3);
+
+			printf("The average is: %d\n", avg);
+
 			PAUSE;
 
 			break;
@@ -75,7 +102,11 @@ int main()
 			// Lowest
 
 			CLS;
-			printf("Test");
+
+			int lowest = getLowest(number1, number2, number3);
+			
+			printf("The lowest number is: %d\n", lowest);
+
 			PAUSE;
 
 			break;
@@ -135,3 +166,38 @@ char getSelection()
 
 	return toupper(result);
 } // end getSelection()
+
+int getSum(int num1, int num2, int num3)
+{
+	return num1 + num2 + num3;
+} // end getSum()
+
+int getProduct(int num1, int num2, int num3)
+{
+	return (num1 * num2 * num3);
+} // end getProduct()
+
+int getAvg(int num1, int num2, int num3)
+{
+	return (num1 + num2 + num3) / 3;
+} // end getAvg()
+
+int getLowest(int num1, int num2, int num3)
+{
+	int result;
+
+	if (num1 < num2 && num1 < num3)
+	{
+		result = num1;
+	}
+	else if (num2 < num1 && num2 < num3)
+	{
+		result = num2;
+	}
+	else
+	{
+		result = num3;
+	}
+
+	return result;
+} // end getLowest()
