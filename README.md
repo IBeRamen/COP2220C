@@ -2,4 +2,4 @@
 
 This repository contains my work for the class COP2220C taken at Valencia College. It is an intermediate/advanced programming class consisting of C.
 
-Looking for the previous repository for COP1000C? Click here: [link](https://github.com/IBeRamen/COP1000C, "COP1000C").
+Looking for the previous repository for COP1000C? Click here: [link](https://github.com/IBeRamen/COP1000C "COP1000C").
