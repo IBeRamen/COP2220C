@@ -157,7 +157,7 @@ int main()
 
 			fclose(fp);
 
-			printf("Saved as gradebook.txt....");
+			printf("Saved as gradebook.txt....\n");
 
 			PAUSE;
 
