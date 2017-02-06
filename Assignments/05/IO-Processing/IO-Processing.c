@@ -27,6 +27,8 @@ int main()
 
 	static int students[SIZE][4];
 
+	// Create the binary file or open if not made
+
 	FILE *fp;
 
 	fp = fopen("gradebookbinary.txt", "wb");
@@ -39,6 +41,9 @@ int main()
 		{
 
 		case 1:
+
+			// Get the grades
+
 			CLS;
 
 			int studentID, exam1, exam2, exam3, exam4;
@@ -68,6 +73,9 @@ int main()
 			break;
 
 		case 2:
+
+			// Get the average for a student
+
 			CLS;
 
 			float sum = 0.0;
@@ -87,6 +95,9 @@ int main()
 			break;
 
 		case 3:
+
+			// Get the class average for a specific exam
+
 			CLS;
 
 			int exam = 0;
@@ -107,6 +118,9 @@ int main()
 			break;
 
 		case 4:
+
+			// Get the class average
+
 			CLS;
 
 			sum = 0;
@@ -126,6 +140,9 @@ int main()
 			break;
 
 		case 5:
+
+			// Save students array to gradebook.txt
+
 			CLS;
 
 			fp = fopen("gradebook.txt", "w");
@@ -145,6 +162,9 @@ int main()
 			break;
 
 		case 6:
+
+			// Remake gradebook.txt and set array to 0
+
 			CLS;
 
 			fp = fopen("gradebook.txt", "w+");
@@ -159,6 +179,8 @@ int main()
 
 		case 7:
 			CLS;
+
+			// Couldn't get this to work write with 2D arrays...
 
 			fp = fopen("gradebookbinary.txt", "wb");
 
