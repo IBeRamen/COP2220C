@@ -24,6 +24,10 @@ int main()
 
 	static int students[SIZE][4];
 
+	FILE *fp;
+
+	fp = fopen("gradebookbinary.txt", "wb");
+
 	do
 	{
 		userSelection = getSelection();
@@ -112,7 +116,7 @@ int main()
 				}
 			}
 
-			printf("The sum is %.2f.\n", sum / SIZE);
+			printf("The class average is %.2f.\n", sum / SIZE);
 
 			PAUSE;
 
@@ -121,12 +125,47 @@ int main()
 		case 5:
 			CLS;
 
+			fp = fopen("gradebook.txt", "w");
+
+			for (int i = 0; i <= SIZE; i++)
+			{
+				for (int j = 0; j <= 4; j++)
+				{
+					fprintf(fp, "students[%i][%i] = %i\n", i, j, students[i][j]);
+				}
+			}
+
+			fclose(fp);
+
 			PAUSE;
 
 			break;
 
 		case 6:
 			CLS;
+
+			fp = fopen("gradebook.txt", "w+");
+
+			fclose(fp);
+
+			static int students[SIZE][4] = { 0 };
+
+			PAUSE;
+
+			break;
+
+		case 7:
+			CLS;
+
+			fp = fopen("gradebookbinary.txt", "wb");
+
+			for (int i = 0; i <= SIZE; i++)
+			{
+				fwrite(&students[i], sizeof(students[i][0]), SIZE, fp);
+			}
+
+			fclose(fp);
+
 
 			printf("Quitting...");
 
@@ -138,7 +177,7 @@ int main()
 
 			break;
 		}
-	} while (userSelection != 6);
+	} while (userSelection != 7);
 
 	return 0;
 
@@ -154,8 +193,9 @@ void displayMenu()
 	printf("2. Display the average exam scores for a student\n");
 	printf("3. Display the average exam scores by exam\n");
 	printf("4. Display the class average\n");
-	printf("5. Clear out the gradebook\n");
-	printf("6. Quit\n");
+	printf("5. Output to gradebook.txt\n");
+	printf("6. Clear out the gradebook\n");
+	printf("7. Quit\n");
 	printf("=======================================\n");
 
 	printf("Enter your selection: ");
