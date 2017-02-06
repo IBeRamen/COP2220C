@@ -111,7 +111,7 @@ int main()
 				sum += students[i][exam];
 			}
 
-			printf("The average for exam #%i is %.2f.\n", exam, sum);
+			printf("The average for exam #%i is %.2f.\n", exam, sum / SIZE);
 
 			PAUSE;
 
