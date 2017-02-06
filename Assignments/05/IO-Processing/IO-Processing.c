@@ -1,5 +1,8 @@
 /*
-*	
+*	Name: Omar Rahman
+*	Assignment: Assignment 05 - IO-Processing
+*	Date: 2/5/2017
+*	Purpose: IO and console gradebook.
 */
 
 #define _CRT_SECURE_NO_WARNINGS 1
