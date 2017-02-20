@@ -1,103 +1,100 @@
+/*
+*	Name: Omar Rahman
+*	Date: 2/19/2017
+*	Assignment: Assign-String - String manipulation.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #define PAUSE system("pause");
 #define CLS system("cls");
+#define FLUSH flush();
 
-void displayMenu();
-void stringReverse(char*);
-
-int getSelection();
+void outputString(char *str);
+void reverseString(char *str);
+void outputLength(char *str);
+void outputVertical(char *str);
+void outputTriangle(char *str);
+void flush();
 
 int main()
 {
-
-	int userSelection;
-	char s1[100];
+	char replay;
+	char* userString[100];
 
 	do
 	{
-		userSelection = getSelection();
+		CLS;
 
-		switch (userSelection)
-		{
+		printf("Enter a string (up to 100 characters): ");
+		fgets(userString, 100, stdin);
+		fflush(stdin);
+		//scanf_s("%99s", userString, 100);
 
-		case 1:
-			CLS;
+		printf("The string: ");
+		outputString(userString);
 
-			printf("Enter a string (max 100 char): ");
-			scanf_s("%s", s1);
+		printf("Reveresed: ");
+		reverseString(userString);
 
-			PAUSE;
+		printf("\n\nLength: ");
+		outputLength(userString);
 
-			break;
+		printf("\n\nVertical: ");
+		outputVertical(userString);
 
-		case 2:
-			CLS;
+		printf("Triangle: ");
+		outputTriangle(userString);
 
-			PAUSE;
+		printf("Play again? (Y/N) ");
+		scanf_s(" %c", &replay);
+		FLUSH;
+	} while (replay == 'y' || replay == 'Y');
 
-			break;
 
-		case 3:
-			CLS;
-
-			PAUSE;
-
-			break;
-
-		case 4:
-			CLS;
-
-			PAUSE;
-
-			break;
-
-		case 5:
-			CLS;
-
-			PAUSE;
-
-			break;
-
-		default:
-
-			PAUSE;
-
-			break;
-		}
-	} while (userSelection != 5);
-
+	return 0;
 } // end main
 
-void stringReverse(char* str)
+void outputString(char *str)
 {
-
+	printf("%s\n", str);
 }
 
-void displayMenu()
+void reverseString(char *str)
 {
+	for (int i = strlen(str); i >= 0; i--)
+	{
+		printf("%c", str[i]);
+	}
+}
 
-	CLS;
-
-	printf("================ Menu =================\n");
-	printf("1. Example 1\n");
-	printf("2. Example 2\n");
-	printf("3. Example 3\n");
-	printf("4. Example 4\n");
-	printf("5. Quit\n");
-	printf("=======================================\n");
-
-	printf("Enter your selection: ");
-
-} // end displayMenu()
-
-int getSelection()
+void outputLength(char *str)
 {
-	int result;
+	printf("%i", strlen(str));
+}
 
-	displayMenu();
-	scanf_s("%i", &result);
+void outputVertical(char *str)
+{
+	for (int i = 0; i < strlen(str); i++)
+	{
+		printf("\n%c", str[i]);
+	}
+}
 
-	return result;
-} // end getSelection()
+void outputTriangle(char *str)
+{
+	for (int i = strlen(str); i >= 0; i--)
+	{
+		printf("\n");
+		for (int j = 0; j < i; j++)
+		{
+			printf("%c", str[j]);
+		}
+	}
+}
+
+void flush()
+{
+	while (getchar() != '\n');
+} // end flush();
