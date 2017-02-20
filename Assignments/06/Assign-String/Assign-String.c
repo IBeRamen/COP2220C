@@ -1,12 +1,11 @@
 /*
 *	Name: Omar Rahman
 *	Date: 2/19/2017
-*	Assignment: Assign-String - String manipulation.
+*	Assignment: Assign-String. String manipulation,
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define PAUSE system("pause");
 #define CLS system("cls");

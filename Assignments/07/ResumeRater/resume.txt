@@ -1,0 +1,40 @@
+﻿Omar Rahman
+Full Stack Developer
+	Orlando FL
+1 321 295 9136
+iberamen@gmail.com
+	EXPERIENCE
+SelfEmployed  Freelancer
+June 2014  Present  Multiple Locations
+Worked with multiple clients on various projects for frontend and backend design on multiple websites which helped my clients achieve their goal by increasing their web presence.
+Microsoft Gaming Lab  Intern
+June 2012  June 2014  Amman Jordan
+Taught multiple students the fundamentals of computer programming which helped them create their first video game and various other projects.
+EDUCATION
+Valencia College Orlando FL  Computer Science A.S Degree
+August 2016  Present
+East River Orlando FL  High School Diploma
+September 2014  June 2016
+Graduated as an honor student. Founded the programming club and helped the robotics team achieve a top 15 position statewide in the VEX Robotics competition.
+	SKILLS
+ HTML5 Fluent
+ CSS3 Fluent
+    Bootstrap 3
+    MaterializeCSS
+    SASS
+ JavaScript Beginner
+ PHP Beginner
+ Java Beginner
+ C Beginner
+ Linux Intermediate
+    Kali Security Penetration Testing Beginner
+AWARDS
+Google Hackathon Winner
+November 2013   Amman Jordan
+Lead a team of five students to build a game within 24 hours in an HTML5 2D game engine which helped attain 1st place in the Hackathon.
+LANGUAGES
+ English Native
+ Arabic Native
+LINKS
+ github.comiberamen
+ www.omartech.me
