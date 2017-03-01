@@ -1,18 +1,60 @@
+/*
+*	Assignment: Resume Ratter
+*	Author: Omar Rahman
+*	Date: 2/12/2017
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
+#define PAUSE system("PAUSE")
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-#define PAUSE system("pause");
-#define CLS system("cls");
-
 const char convertString(FILE *fp);
 
 int main() {
 
-	char resume = convertString("resume.txt");
-	char keywords = convertString("keywords.txt");
+	FILE* resume;
+	FILE* keywords;
+
+	char keyword[50] = { "" };
+	char scannedWord[50];
+	int count = 0;
+
+	resume = fopen("resume.txt", "r");
+	keywords = fopen("keywords.txt", "r");
+
+	// Check for errors
+	if (!resume) {
+		printf("Error! Cannot open file.\n");
+		return 1;
+	}
+
+	printf("Enter keyword to find in resume.txt: ");
+	scanf("%s", keyword);
+
+	while (1) {
+
+		fscanf(resume, " ,");
+
+		if (fscanf(resume, " %20[^, \t\n]", scannedWord) == 1) {
+
+			if (!strcmp(scannedWord, keyword)) {
+				count++;
+			}
+
+		}
+		// Once reached the end of the file, break loop
+		if (feof(resume))
+		{
+			break;
+		}
+	}
+
+	printf("Found %i times.\n", count);
+
+	fclose(resume);
 
 	PAUSE;
 
