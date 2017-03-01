@@ -17,8 +17,9 @@
 
 int main()
 {
+	srand((unsigned)time(NULL));
 
-	char puzzle[35][70] = { "" };
+	const char *puzzle[35][70] = { "" };
 	char userInput[MAXSIZE] = { "" };
 
 	int maxwords = 0;
@@ -38,8 +39,43 @@ int main()
 
 	for (int i = 0; i < sizeof puzzle / sizeof *puzzle; i++)
 	{
-		printf("%s", puzzle[i]);
+		printf("\n%s", puzzle[i]);
 	}
+
+	/*
+	void reverseString(char *str)
+{
+	for (int i = strlen(str); i >= 0; i--)
+	{
+		printf("%c", str[i]);
+	}
+}
+
+void outputLength(char *str)
+{
+	printf("%i", strlen(str));
+}
+
+void outputVertical(char *str)
+{
+	for (int i = 0; i < strlen(str); i++)
+	{
+		printf("\n%c", str[i]);
+	}
+}
+
+void outputTriangle(char *str)
+{
+	for (int i = strlen(str); i >= 0; i--)
+	{
+		printf("\n");
+		for (int j = 0; j < i; j++)
+		{
+			printf("%c", str[j]);
+		}
+	}
+}
+	*/
 
 
 	PAUSE;
