@@ -23,7 +23,6 @@ int main() {
 	int count = 0;
 
 	resume = fopen("resume.txt", "r");
-	keywords = fopen("keywords.txt", "r");
 
 	// Check for errors
 	if (!resume) {
