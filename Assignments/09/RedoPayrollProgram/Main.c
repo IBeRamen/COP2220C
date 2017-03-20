@@ -1,14 +1,14 @@
 #define _CRT_SECURE_NO_WARNINGS
-#define PAUSE system("PAUSE");
-#define CLS system("CLS");
-
-#define SIZE 100000
+#define PAUSE system("pause");
+#define CLS system("cls");
 
 #include <stdio.h>
 #include <stdlib.h>
 
-void calcPay(float hourlyWage, float hoursWorked);
 void displayMenu();
+void getData(struct payroll * p, int payRecSize);
+void displayData(struct payroll * p, int payRecSize);
+void search(struct payroll * p, int payRecSize);
 int getSelection();
 
 typedef struct {
@@ -17,25 +17,29 @@ typedef struct {
 	int year;
 } DATE;
 
-typedef struct {
+struct payroll {
 	char name[100];
 	int age;
-	float hourlyWage;
-	float hoursWorked;
-	float regularPay;
+	int id;
+	float hrlyWage;
+	float hrsWorked;
+	float regPay;
 	float otPay;
 	float totalPay;
 	DATE payDate;
-} PAYRECORD;
+};
 
 int main()
 {
 
-	static PAYRECORD payroll[SIZE] = { 0 }; // allow the user to input 100,000 records
+	int userSelection, payRecSize;
+	struct stdrec * j;
 
-	int userSelection;
-	int searchDay, searchMonth, searchYear, id;
-	int i = 0;
+	// Ask the user for amount of students in class before showing menu
+	printf("Enter the size of the payroll: ");
+	scanf("%d%*c", &payRecSize);
+
+	j = (struct payroll *)malloc(payRecSize *(sizeof(struct payroll)));
 
 	do
 	{
@@ -43,18 +47,10 @@ int main()
 
 		switch (userSelection)
 		{
-
 		case 1:
 			CLS;
 
-			printf("Please enter the month: ");
-			scanf("%i", &searchMonth);
-
-			printf("Please enter the day: ");
-			scanf("%i", &searchDay);
-
-			printf("Please enter the year: ");
-			scanf("%i", &searchYear);
+			getData(j, payRecSize);
 
 			PAUSE;
 
@@ -63,31 +59,7 @@ int main()
 		case 2:
 			CLS;
 
-			printf("Enter the student id: ");
-			scanf("%i", &id);
-
-			printf("Please enter the pay month: ");
-			scanf("%i", &payroll[id].payDate.month);
-
-			printf("Please enter the day: ");
-			scanf("%i", &payroll[id].payDate.day);
-
-			printf("Please enter the year: ");
-			scanf("%i", &payroll[id].payDate.year);
-
-			printf("Enter the name: ");
-			scanf("%s", &payroll[id].name);
-
-			printf("Enter the age: ");
-			scanf("%d", &payroll[id].age);
-
-			printf("Enter the hourly wage: ");
-			scanf("%d", &payroll[id].hourlyWage);
-
-			printf("Enter the hours worked: ");
-			scanf("%d", &payroll[id].hoursWorked);
-
-			calcPay(payroll[id].hourlyWage, payroll[id].hoursWorked);
+			displayData(j, payRecSize);
 
 			PAUSE;
 
@@ -96,6 +68,8 @@ int main()
 		case 3:
 			CLS;
 
+			search(j, payRecSize);
+
 			PAUSE;
 
 			break;
@@ -103,56 +77,147 @@ int main()
 		case 4:
 			CLS;
 
-			printf("Saving file and exiting");
+			printf("Quitting...");
 
 			break;
 
-		default:
-
-			printf("Invalid choice.");
-
-			PAUSE;
-
-			break;
 		}
 	} while (userSelection != 4);
 
 	return 0;
 }
 
-void calcPay(float hourlyWage, float hoursWorked)
+void search(struct payroll * p, int payRecSize)
 {
-	float overtimeWorked, grossPay, overtimePay, regularPay;
+	int searchMonth, searchDay, searchYear;
 
-	if (hoursWorked <= 40) {
-		regularPay = hourlyWage * hoursWorked;
-		overtimePay = 0.0;
-		overtimeWorked = 0.0;
+	for (int i = 0; i < payRecSize; i++) {
+		printf("Enter the month: ");
+		scanf("%d%*c", &searchMonth);
+
+		printf("Enter the day: ");
+		scanf("%d%*c", &searchDay);
+
+		printf("Enter the year: ");
+		scanf("%d%*c", &searchYear);
+
+		if (p->payDate.month == searchMonth
+			&& p->payDate.day == searchDay
+			&& p->payDate.year == searchYear)
+		{
+			CLS;
+			printf("Match(s) found:\n\n");
+			printf("Employee ID: %d", p->id);
+			printf("\tEmployee Name: %s\n", p->name);
+			printf("\tEmployee Age: %d\n", p->age);
+			printf("\tHourly Wage: %.2f\n", p->hrlyWage);
+			printf("\tHours Worked: %.2f\n", p->hrsWorked);
+		}
+		else
+		{
+			printf("No records found.\n");
+		}
+
+		printf("Press any key to go back to the main menu.\n");
+		break;
 	}
-	else {
-		overtimeWorked = hoursWorked - 40;
-		overtimePay = hourlyWage * 1.5 * overtimeWorked;
-		regularPay = hourlyWage * (hoursWorked - overtimeWorked);
+}
+
+void getData(struct payroll * p, int payRecSize)
+{	
+	
+	for (int i = 0; i < payRecSize; i++) {
+
+		printf(
+			"This will loop based on the size of the payroll.\n"
+			"Example: If you specified size of 10. It will ask you\n"
+			"to enter 10 records.\n\n"
+		);
+
+		printf("Employee ID: ");
+		scanf("%d%*c", &p->id);
+
+		printf("Employee Name: ");
+		gets(p->name);
+
+		printf("Employee Age: ");
+		scanf("%d%*c", &p->age);
+
+		printf("Hourly Wage: ");
+		scanf("%f%*c", &p->hrlyWage);
+
+		printf("Hours Worked: ");
+		scanf("%f%*c", &p->hrsWorked);
+
+		printf("Pay Month: ");
+		scanf("%d%*c", &p->payDate.month);
+
+		printf("Pay Day: ");
+		scanf("%d%*c", &p->payDate.day);
+
+		printf("Pay Year: ");
+		scanf("%d%*c", &p->payDate.year);
+
+		CLS;
+
+		printf("Record added! Add the next record (if any).\n\n");
+		printf("Employee ID: %d\n", p->id);
+		printf("\tEmployee Name: %s\n", p->name);
+		printf("\tEmployee Age: %d\n", p->age);
+		printf("\tHourly Wage: %.2f\n", p->hrlyWage);
+		printf("\tHours Worked: %.2f\n", p->hrsWorked);
+		printf("\tPay Month: %d\n", p->payDate.month);
+		printf("\tPay Day: %d\n", p->payDate.day);
+		printf("\tPay Year: %d\n", p->payDate.year);
+
+		PAUSE;
+
+		CLS;
+
+		p++;
+
 	}
+}
 
-	grossPay = regularPay + overtimePay;
+void displayData(struct payroll * p, int payRecSize)
+{
+	float regPay, otPay, otWorked, totalPay;
+	for (int i = 0; i < payRecSize; i++)
+	{
+		// Calculate pay
+		if (p->hrsWorked <= 40)
+		{
+			p->regPay = p->hrlyWage * p->hrsWorked;
+			p->otPay = 0.0;
+		}
+		else {
+			otWorked = p->hrsWorked - 40;
+			p->regPay = p->hrlyWage * (p->hrsWorked - otWorked);
+			p->otPay = (p->hrlyWage * 1.5) * otWorked;
+		}
+		p->totalPay = p->regPay + p->otPay;
 
-	printf("Gross Pay: %.2f\n", grossPay);
-	printf("Regular Pay: %.2f\n", regularPay);
-	printf("Overtime Pay: %.2f\n", overtimePay);
+		printf("ID: %d\n", p->id);
+		printf("\tRegular Pay: %.2f\n", p->regPay);
+		printf("\tOvertime Pay: %.2f\n", p->otPay);
+		printf("\tTotal Pay: %.2f\n", p->totalPay);
 
-} // end calcPay
+		p++;
+	}
+}
+
 
 void displayMenu()
 {
 
 	CLS;
 
+	printf("Payroll Record\n\n");
 	printf("================ Menu =================\n");
-	printf("1. Search by date\n");
-	printf("2. Enter new record\n");
-	printf("3. Display total payroll\n");
-	printf("4. Save & Quit\n");
+	printf("1. Add a payroll record\n");
+	printf("2. Display total payroll\n");
+	printf("3. Search\n");
+	printf("4. Quit\n");
 	printf("=======================================\n");
 
 	printf("Enter your selection: ");
@@ -166,6 +231,7 @@ int getSelection()
 
 	displayMenu();
 	scanf("%i", &result);
+	fflush(stdin);
 
 	return result;
 } // end getSelection()
