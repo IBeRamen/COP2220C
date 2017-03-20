@@ -1,3 +1,8 @@
+/*
+*	Name: Omar Rahman
+*	Assignment: Redo Payroll Assignment
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 #define PAUSE system("pause");
 #define CLS system("cls");
