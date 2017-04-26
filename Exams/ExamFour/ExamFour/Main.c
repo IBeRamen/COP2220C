@@ -1,6 +1,6 @@
 /*
 *	Assignment: Exam 4
-*	Purpose: A bank management system in C.
+*	Purpose: A payroll system using array of structs.
 *	Author: Omar Rahman
 */
 #include "Header.h"
@@ -15,8 +15,8 @@ struct payrecord {
 	struct namerecord name;
 	float hoursWorked;
 	float hourlyRate;
-	float regularWorked;
-	float overtimeWorked;
+	float regularPay;
+	float overtimePay;
 	float gross;
 	float tax;
 	float netPay;
@@ -30,20 +30,22 @@ int getSelection();
 double calcPayroll(payrecord payroll[], int n, double * tax);
 
 void printAllRecords(payrecord payroll[], int n);
-void printPayroll(double gross, double tax);
 void getName(payrecord payroll[], int i);
+void printGrossPayroll(double gross, double tax);
 void displayMenu();
 
 int main()
 {
 	int userSelection;
-	int i = 0, n = 0;
+	int i = 0, n = 0, numOfEmployees = 0;
 
 	double gross = 0, tax = 0;
 
 	payrecord payroll[MAX];
 
-
+	// Ask the user how many employees to add
+	printf("How many employees do you want to add? ");
+	scanf("%d%*c", &numOfEmployees);
 
 	do
 	{
@@ -56,7 +58,7 @@ int main()
 			CLS;
 
 			// Get the employee information from the user
-			n = getRecords(payroll, MAX);
+			n = getRecords(payroll, numOfEmployees);
 
 			PAUSE;
 
@@ -65,6 +67,7 @@ int main()
 		case 2:
 			CLS;
 
+			gross = calcPayroll(payroll, n, &tax);
 			printAllRecords(payroll, n);
 
 			PAUSE;
@@ -74,16 +77,9 @@ int main()
 		case 3:
 			CLS;
 
-			printPayroll(gross, tax);
+			printGrossPayroll(gross, tax);
 
 			PAUSE;
-
-			break;
-
-		case 4:
-
-			// Free memory
-			free(payroll);
 
 			break;
 
@@ -107,7 +103,7 @@ void displayMenu()
 	printf("===========      Menu       ===========\n");
 	printf("1. Add an employee\n");
 	printf("2. Display ALL employees\n");
-	printf("3. Print GROSS payroll\n");
+	printf("3. Display GROSS Payroll\n");
 	printf("4. Quit\n");
 	printf("=======================================\n");
 
@@ -193,18 +189,18 @@ double calcPayroll(payrecord payroll[], int n, double * tax)
 	{
 		if (payroll[i].hoursWorked <= 40)
 		{
-			payroll[i].overtimeWorked = 0;
-			payroll[i].gross = payroll[i].hoursWorked * payroll[i].hourlyRate;
-			payroll[i].regularWorked = payroll[i].gross;
+			payroll[i].regularPay = payroll[i].gross = payroll[i].hoursWorked * payroll[i].hourlyRate;
+			payroll[i].overtimePay = 0;
 		}
 		else {
-			payroll[i].regularWorked = 40 * payroll[i].hourlyRate;
-			payroll[i].overtimeWorked = (payroll[i].hoursWorked - 40) * 1.5 * payroll[i].hourlyRate;
+			payroll[i].regularPay = 40 * payroll[i].hourlyRate;
+			payroll[i].overtimePay = (payroll[i].hoursWorked - 40) * 1.5 * payroll[i].hourlyRate;
 		}
 
 		// Gross pay
-		payroll[i].gross = payroll[i].regularWorked + payroll[i].overtimeWorked;
+		payroll[i].gross = payroll[i].regularPay + payroll[i].overtimePay;
 
+		// Tax bracket
 		if (payroll[i].gross <= 2000)
 		{
 			payroll[i].tax = payroll[i].gross * 0.1;
@@ -235,22 +231,24 @@ void printAllRecords(payrecord payroll[], int n)
 
 	float z;
 
-	printf("===== Employee List =====");
+	printf("===== Employee List =====\n");
 
 	for (i = 0; i < n; i++)
 	{
 		printf("ID Number: %d\n", payroll[i].id);
 		printf("Name: %s %s\n", payroll[i].name.first, payroll[i].name.last);
 		printf("Hours Worked: %.2f\n", payroll[i].hoursWorked);
-		printf("Overtime Worked: %.2f\n", payroll[i].overtimeWorked);
+		printf("Overtime Pay: $%.2f\n", payroll[i].overtimePay);
 		printf("Hourly Rate: $%.2f\n", payroll[i].hourlyRate);
 		printf("Gross Pay: $%.2f\n", payroll[i].gross);
 		printf("Tax Paid: $%.2f\n", payroll[i].tax);
 	}
 }
 
-void printPayroll(double gross, double tax)
+void printGrossPayroll(double gross, double tax)
 {
-	printf("Gross Pay: $%8.2f\n", gross);
-	printf("Total Tax: $%8.2f\n", tax);
+	printf("==== TOTAL PAYROLL ====\n");
+	printf("Gross Employee Pay: $%.2f\n", gross);
+	printf("Gross Company Tax: $%.2f\n", tax);
+
 }

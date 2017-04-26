@@ -7,4 +7,4 @@
 #define CLS system("cls");
 #define FLUSH fflush(stdin);
 
-#define MAX 1
+#define MAX 100
